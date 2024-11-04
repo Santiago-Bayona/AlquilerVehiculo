@@ -36,7 +36,6 @@ public class Reserva{
       this.vehiculo = vehiculo;
    }
    public int calcularCostoTotal() {
-      // Aquí se utiliza polimorfismo. Llamamos al método de cálculo de costo del vehículo
       return vehiculo.CalcularCosto(diasAlquiler);
   }
 }

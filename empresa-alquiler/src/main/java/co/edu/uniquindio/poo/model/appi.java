@@ -7,14 +7,14 @@ public class appi {
             Empresa empresa = new Empresa("Alquiler de Vehículos XYZ");
     
             // Crear vehículos de diferentes tipos
-            Auto auto = new Auto("ABC123", "Toyota", "Corolla", 2020, 4);
+            //Auto auto = new Auto("ABC123", "Toyota", "Corolla", 2020, 4);
             Moto moto = new Moto("XYZ789", "Yamaha", "MT-07", 2019, Moto.TipoCaja.Automatica); 
             Camioneta camioneta = new Camioneta("LMN456", "Ford", "F-150", 2021, 150);
     
             // Agregar vehículos a la empresa
-            empresa.agregarVehiculo(auto);
-            empresa.agregarVehiculo(moto);
-            empresa.agregarVehiculo(camioneta);
+            //empresa.agregarVehiculo(auto);
+            //empresa.agregarVehiculo(moto);
+            //empresa.agregarVehiculo(camioneta);
     
             // Crear clientes
             Cliente cliente1 = new Cliente("Juan Pérez",18, "12345");

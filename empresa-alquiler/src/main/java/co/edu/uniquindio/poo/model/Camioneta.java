@@ -29,7 +29,7 @@ public class Camioneta extends Vehiculo{
     }
 
     public int CalcularCosto(int dias){
-        int costo = TarifaBase * dias;
+        int costo=0; 
         costo += (TarifaBase * PORCENTAJE_EXTRA * CapacidadCarga) * dias;
         return costo;
     }

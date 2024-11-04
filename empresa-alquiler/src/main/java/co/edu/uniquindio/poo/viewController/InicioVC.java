@@ -47,7 +47,11 @@ public class InicioVC {
 
     @FXML
     void AdministrarVehiculos(ActionEvent event) {
-
+        try {
+            app.openCamioneta();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setApp(App app) {
