@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.ReservaVC">
+   <children>
+      <Label fx:id="lbl_titReserva" layoutX="238.0" layoutY="14.0" prefHeight="31.0" prefWidth="86.0" text="Reserva">
+         <font>
+            <Font name="Calibri Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="103.0" layoutY="55.0" text="Codigo: " />
+      <Label layoutX="109.0" layoutY="107.0" prefHeight="21.0" prefWidth="45.0" text="Dias:" />
+      <Label layoutX="101.0" layoutY="155.0" text="Vehiculo:" />
+      <TextField fx:id="txt_codigo" layoutX="207.0" layoutY="50.0" />
+      <TextField fx:id="txt_dias" layoutX="207.0" layoutY="102.0" />
+      <TextField fx:id="txt_vehiculo" layoutX="207.0" layoutY="150.0" />
+      <TableView fx:id="tblistReserva" layoutX="66.0" layoutY="315.0" prefHeight="200.0" prefWidth="389.0">
+        <columns>
+          <TableColumn fx:id="tbcCodigo" prefWidth="75.0" text="Codigo" />
+          <TableColumn fx:id="tbcVehiculo" prefWidth="75.0" text="Vehiculo" />
+            <TableColumn fx:id="tbcDias" prefWidth="75.0" text="Dias" />
+        </columns>
+      </TableView>
+      <Label layoutX="110.0" layoutY="265.0" text="Costo:" />
+      <TextField fx:id="txt_costo1" editable="false" layoutX="207.0" layoutY="260.0" />
+      <Button fx:id="btn_Costo" layoutX="231.0" layoutY="202.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="139.0" text="Calcular  Costo" />
+   </children>
+</AnchorPane>
