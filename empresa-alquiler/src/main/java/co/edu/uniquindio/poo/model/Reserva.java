@@ -32,10 +32,24 @@ public class Reserva{
       return vehiculo;
    }
 
+   public Vehiculo getPlaca(){
+      return getPlaca();
+   }
+
    public void setVehiculo(Vehiculo vehiculo) {
       this.vehiculo = vehiculo;
    }
    public int calcularCostoTotal() {
       return vehiculo.CalcularCosto(diasAlquiler);
   }
+
+   public Object getCosto() {
+      // TODO Auto-generated method stub
+      throw new UnsupportedOperationException("Unimplemented method 'getCosto'");
+   }
+
+public Object getReserva() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'getReserva'");
+}
 }

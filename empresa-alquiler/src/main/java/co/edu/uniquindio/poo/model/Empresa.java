@@ -304,4 +304,33 @@ public boolean actualizarAuto(String placa, Auto actualizado) {
     }
     return centinela;
 }
+public Auto buscarAuto(String placa){
+    Auto AutoEncontrar = null;
+    for(Auto auto : autos){
+        if(auto.getPlaca().equals(placa)){
+            AutoEncontrar = auto;
+        }
+    }
+    return AutoEncontrar;
+}
+
+public Moto buscarMoto(String placa){
+    Moto motoEncontrada = null;
+    for(Moto moto : motos){
+        if(moto.getPlaca().equals(placa)){
+            motoEncontrada = moto;
+        }
+    }
+    return motoEncontrada;
+}
+
+public Camioneta buscarCamioneta(String placa){
+    Camioneta camionetaEncontrada = null;
+    for(Camioneta camioneta : camionetas){
+        if(camioneta.getPlaca().equals(placa)){
+            camionetaEncontrada = camioneta;
+        }
+    }
+    return camionetaEncontrada;
+}
 }

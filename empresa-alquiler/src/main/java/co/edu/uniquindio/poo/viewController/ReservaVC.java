@@ -4,14 +4,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.poo.App;
-import co.edu.uniquindio.poo.Controller.CamionetaCON;
 import co.edu.uniquindio.poo.Controller.ReservaCON;
-import co.edu.uniquindio.poo.viewController.CamionetaVC;
 import co.edu.uniquindio.poo.model.Auto;
 import co.edu.uniquindio.poo.model.Camioneta;
 import co.edu.uniquindio.poo.model.Moto;
 import co.edu.uniquindio.poo.model.Reserva;
 import co.edu.uniquindio.poo.model.Vehiculo;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,8 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -61,13 +60,7 @@ public class ReservaVC {
     private TextField txt_dias;
 
     @FXML
-    private Button btn_Costo;
-
-    @FXML
-    private TextField txt_vehiculo;
-
-    @FXML
-    private TextField txt_costo1;
+    private TableColumn<Reserva, Integer> tbcCosto;
 
     @FXML
     private Button btn_Eliminar;
@@ -85,14 +78,9 @@ public class ReservaVC {
     private TableColumn<Reserva, Integer> tbcDias;
 
     @FXML
-    void CalcularCosto(ActionEvent event) {
-        if (selectedReserva != null) {
-            int costoTotal = selectedReserva.calcularCostoTotal();
-            txt_costo1.setText(String.valueOf(costoTotal));
-        } else {
-            txt_costo1.setText("Seleccione una reserva");
-        }
-    }
+    private TextField txt_Placa;
+
+    
 
     @FXML
     void volver(ActionEvent event) {
@@ -103,9 +91,7 @@ public class ReservaVC {
         }
     }
 
-    public void setApp(App app) {
-        this.app = app;
-    }
+    
 
     @FXML
     void agregarReserva(ActionEvent event) {
@@ -129,14 +115,12 @@ public class ReservaVC {
         assert lbl_titReserva != null : "fx:id=\"lbl_titReserva\" was not injected: check your FXML file 'reserva.fxml'.";
         assert btn_Agregar != null : "fx:id=\"btn_Agregar\" was not injected: check your FXML file 'reserva.fxml'.";
         assert txt_codigo != null : "fx:id=\"txt_codigo\" was not injected: check your FXML file 'reserva.fxml'.";
-        assert txt_costo1 != null : "fx:id=\"txt_costo1\" was not injected: check your FXML file 'reserva.fxml'.";
         assert tbcDias != null : "fx:id=\"tbcDias\" was not injected: check your FXML file 'reserva.fxml'.";
         assert tbcCodigo != null : "fx:id=\"tbcCodigo\" was not injected: check your FXML file 'reserva.fxml'.";
         assert tblistReserva != null : "fx:id=\"tblistReserva\" was not injected: check your FXML file 'reserva.fxml'.";
         assert btn_Actualizar != null : "fx:id=\"btn_Actualizar\" was not injected: check your FXML file 'reserva.fxml'.";
         assert txt_dias != null : "fx:id=\"txt_dias\" was not injected: check your FXML file 'reserva.fxml'.";
-        assert btn_Costo != null : "fx:id=\"btn_Costo\" was not injected: check your FXML file 'reserva.fxml'.";
-        assert txt_vehiculo != null : "fx:id=\"txt_vehiculo\" was not injected: check your FXML file 'reserva.fxml'.";
+               
         reservaCON = new ReservaCON(App.empresa, null);
         initView();
     }
@@ -162,6 +146,8 @@ public class ReservaVC {
         tbcCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCodigo()));
         tbcDias.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getDiasAlquiler()));
         tbcVehiculo.setCellValueFactory(celldata -> new SimpleObjectProperty(celldata.getValue().getVehiculo()));
+        tbcCosto.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().calcularCostoTotal()));
+
         // Usamos SimpleObjectProperty para manejar Double y Integer correctamente
     }
 
@@ -180,9 +166,12 @@ public class ReservaVC {
         if (reserva != null) {
             txt_codigo.setText(reserva.getCodigo());
             txt_dias.setText(String.valueOf(reserva.getDiasAlquiler()));
-            txt_vehiculo.setText(reserva.getVehiculo().toString());
+            
+            // Asume que txt_vehiculo es el TextField que muestra la placa del vehículo
+            txt_Placa.setText(reserva.getVehiculo().getPlaca());
         }
     }
+    
 
     private void agregarReserva() {
         Reserva reserva = buildReserva();
@@ -195,48 +184,22 @@ public class ReservaVC {
     private Reserva buildReserva() {
         int diasAlquiler = Integer.parseInt(txt_dias.getText());
         String codigo = txt_codigo.getText();
-        String tipoVehiculo = txt_vehiculo.getText().trim();
-        
+        String matricula = txt_Placa.getText().trim();
+    
         Vehiculo vehiculo = null;
-        switch (tipoVehiculo.toLowerCase()) {
-            case "camioneta":
-                vehiculo = new Camioneta(
-                    camionetaVC.getPlacaCamioneta(),
-                    camionetaVC.getMarcaCamioneta(),
-                    camionetaVC.getModeloCamioneta(),
-                    camionetaVC.getAnioCamioneta(),
-                    camionetaVC.getCapacidadCarga()
-                );
-                break;
-                case "auto":
-                vehiculo = new Auto(
-                    autoVC.getMatricula(),
-                    autoVC.getMarca(),
-                    autoVC.getModelo(),
-                    autoVC.getAnio(),
-                    autoVC.getCantidadPuertas()
-                );
-                break;
-            case "moto":
-                vehiculo = new Moto(
-                    motoVC.getMatricula(),
-                    motoVC.getMarca(),
-                    motoVC.getModelo(),
-                    motoVC.getAnio(),
-                    motoVC.getCaja()
-                );
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de vehículo desconocido: " + tipoVehiculo);
+    
+        if (app.empresa.buscarAuto(matricula) != null) {
+            vehiculo = app.empresa.buscarAuto(matricula);
+        } else if (app.empresa.buscarMoto(matricula) != null) {
+            vehiculo = app.empresa.buscarMoto(matricula);
+        } else if (app.empresa.buscarCamioneta(matricula) != null) {
+            vehiculo = app.empresa.buscarCamioneta(matricula);
+        } else {
+            throw new IllegalArgumentException("Vehículo no encontrado para la matrícula: " + matricula);
         }
-        
+    
         return new Reserva(diasAlquiler, codigo, vehiculo);
     }
-    
-       
-    
-    
-
     
 
     private void EliminarReserva() {
@@ -271,7 +234,10 @@ public class ReservaVC {
     private void limpiarCamposReserva() {
         txt_codigo.clear();
         txt_dias.clear();
-        txt_vehiculo.clear();
+        txt_Placa.clear();
+    }
+    public void setApp(App app) {
+        this.app = app;
     }
 
 }

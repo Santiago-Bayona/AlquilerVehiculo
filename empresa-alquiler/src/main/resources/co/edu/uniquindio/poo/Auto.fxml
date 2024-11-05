@@ -48,7 +48,7 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="238.0" layoutY="328.0" mnemonicParsing="false" text="Actualizar Auto">
+      <Button fx:id="btnActualizarAuto" layoutX="238.0" layoutY="328.0" mnemonicParsing="false" onAction="#actualizarAuto" text="Actualizar Auto">
          <font>
             <Font size="14.0" />
          </font>
@@ -62,12 +62,12 @@
             <TableColumn fx:id="clnPuertas" prefWidth="75.0" text="Puertas" />
         </columns>
       </TableView>
-      <Button layoutX="98.0" layoutY="581.0" mnemonicParsing="false" text="Limpiar">
+      <Button fx:id="btnLimpiar" layoutX="98.0" layoutY="581.0" mnemonicParsing="false" onAction="#limpiar" text="Limpiar">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <Button layoutX="246.0" layoutY="581.0" mnemonicParsing="false" text="Eliminar">
+      <Button fx:id="btnEliminarAuto" layoutX="246.0" layoutY="581.0" mnemonicParsing="false" onAction="#EliminarAuto" text="Eliminar">
          <font>
             <Font size="14.0" />
          </font>

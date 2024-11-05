@@ -29,8 +29,4 @@ public class ReservaCON {
     public boolean ActualizarReserrva(String codigo, Reserva reserva) {
        return empresa.ActualizarReserva(codigo, reserva);
     }
-
-    public int calcularCostoTotal(){
-        return reserva.calcularCostoTotal();
-    }
 }

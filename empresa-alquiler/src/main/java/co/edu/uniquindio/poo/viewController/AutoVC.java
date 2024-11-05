@@ -144,7 +144,7 @@ import javafx.fxml.FXML;
      }
  
      @FXML
-     void eliminarAuto(ActionEvent event) {
+     void EliminarAuto(ActionEvent event) {
         eliminarAuto();
      }
  
@@ -191,6 +191,7 @@ import javafx.fxml.FXML;
         listenerSelection();
     }
 
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private void initDataBinding() {
         clnPlaca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlaca()));
         clnMarca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));

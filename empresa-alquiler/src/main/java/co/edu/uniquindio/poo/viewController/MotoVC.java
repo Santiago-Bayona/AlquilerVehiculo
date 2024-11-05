@@ -185,7 +185,7 @@ public TipoCaja getCaja() {
         clm_placa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlaca()));
         clm_marca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));
         columnaModelo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getModelo()));
-        clm_añof.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getAnioFabricacion()));
+        clm_añof.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getAñoFabricacion()));
        
         // Usamos SimpleObjectProperty para manejar Double y Integer correctamente
     }
@@ -234,7 +234,7 @@ public TipoCaja getCaja() {
             clm_placa.setText(moto.getPlaca());
             clm_marca.setText(moto.getMarca());
             columnaModelo.setText(moto.getModelo());
-            clm_añof.setText(String.valueOf(moto.getAnioFabricacion()));
+            clm_añof.setText(String.valueOf(moto.getAñoFabricacion()));
             
         }
     }
@@ -265,7 +265,7 @@ public TipoCaja getCaja() {
     private void actualizarmoto() {
 
         if (selectedMoto != null &&
-                motoCON.actualizarmoto(selectedMoto.getPlaca(), buildMoto())) {
+                motoCON.Actualizarmoto(selectedMoto.getPlaca(), buildMoto())) {
 
             int index = motosList.indexOf(selectedMoto);
             if (index >= 0) {
@@ -282,7 +282,7 @@ public TipoCaja getCaja() {
         int Anio = Integer.parseInt(clm_añof.getText());
         TipoCaja tipoCaja = box_caja.getValue();
     
-        Moto moto = new Moto(clm_placa.getText(),clm_marca.getText(),columnaModelo.getText(),Anio,tipoCaja);
+        Moto moto = new Moto(field_Placa.getText(),field_Marca.getText(),field_Modelo.getText(),Anio,tipoCaja);
     
         return moto;
     }
