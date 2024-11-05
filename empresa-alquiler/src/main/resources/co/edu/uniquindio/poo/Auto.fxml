@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="408.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.AutoVC">
+   <children>
+      <Label layoutX="102.0" layoutY="31.0" text="Registro Auto">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNumeroPuertas" layoutX="20.0" layoutY="277.0" text="Numero de Puertas:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPlaca" layoutX="59.0" layoutY="101.0" text="Placa:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblMarca" layoutX="57.0" layoutY="148.0" text="Marca:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblModelo" layoutX="52.0" layoutY="191.0" text="Modelo:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAnioFabricacion" layoutX="27.0" layoutY="233.0" text="Año Fabricación:">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtPlaca" layoutX="156.0" layoutY="96.0" prefHeight="27.0" prefWidth="200.0" />
+      <TextField fx:id="txtMarca" layoutX="156.0" layoutY="143.0" prefHeight="27.0" prefWidth="200.0" />
+      <TextField fx:id="txtModelo" layoutX="156.0" layoutY="186.0" prefHeight="27.0" prefWidth="200.0" />
+      <TextField fx:id="txtAnioFabricacion" layoutX="156.0" layoutY="228.0" prefHeight="27.0" prefWidth="200.0" />
+      <TextField fx:id="txtNumeroPuertas" layoutX="156.0" layoutY="272.0" prefHeight="27.0" prefWidth="200.0" />
+      <Separator layoutX="4.0" layoutY="379.0" prefHeight="1.0" prefWidth="400.0" />
+      <Button fx:id="btnAgregarAuto" layoutX="66.0" layoutY="328.0" mnemonicParsing="false" onAction="#agregarAuto" prefHeight="27.0" prefWidth="101.0" text="Agregar Auto">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="238.0" layoutY="328.0" mnemonicParsing="false" text="Actualizar Auto">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TableView fx:id="tblAuto" layoutX="24.0" layoutY="391.0" prefHeight="165.0" prefWidth="374.0">
+        <columns>
+          <TableColumn fx:id="clnPlaca" prefWidth="75.0" text="Placa" />
+          <TableColumn fx:id="clnMarca" prefWidth="75.0" text="Marca" />
+            <TableColumn fx:id="clnModelo" prefWidth="75.0" text="Modelo" />
+            <TableColumn fx:id="clnAño" prefWidth="75.0" text="Año fabricación" />
+            <TableColumn fx:id="clnPuertas" prefWidth="75.0" text="Puertas" />
+        </columns>
+      </TableView>
+      <Button layoutX="98.0" layoutY="581.0" mnemonicParsing="false" text="Limpiar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="246.0" layoutY="581.0" mnemonicParsing="false" text="Eliminar">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="volver" layoutX="20.0" layoutY="16.0" mnemonicParsing="false" onAction="#volver" text="volver" />
+   </children>
+</AnchorPane>

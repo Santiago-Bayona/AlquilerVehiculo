@@ -24,6 +24,28 @@ public class CamionetaVC {
     Camioneta selectedCamioneta;
     App app;
 
+
+    public String getPlacaCamioneta() {
+        return txt_PlacaCamioneta.getText();
+    }
+    
+    public String getMarcaCamioneta() {
+        return txt_MarcaCamioneta.getText();
+    }
+    
+    public String getModeloCamioneta() {
+        return txt_ModeloCamioneta.getText();
+    }
+    
+    public int getAnioCamioneta() {
+        return Integer.parseInt(txt_AñoCamioneta.getText());
+    }
+    
+    public int getCapacidadCarga() {
+        return Integer.parseInt(txt_capacidad.getText());
+    }
+    
+
     @FXML
     private ResourceBundle resources;
 
@@ -74,6 +96,11 @@ public class CamionetaVC {
 
     @FXML
     private TableColumn<Camioneta, String> tbc_PlacaCamioneta;
+    public Object txt_placaCamioneta;
+    public Object txt_marcaCamioneta;
+    public Object txt_modeloCamioneta;
+    public Object txt_capacidadCamioneta;
+    public Object txt_anioCamioneta;
 
     @FXML
     void volver(ActionEvent event) {
@@ -137,6 +164,7 @@ public class CamionetaVC {
         listenerSelection();
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     private void initDataBinding() {
         tbc_PlacaCamioneta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlaca()));
         tbc_MarcaCamioneta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));

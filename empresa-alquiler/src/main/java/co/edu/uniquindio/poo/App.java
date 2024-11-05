@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 import co.edu.uniquindio.poo.model.Empresa;
+import co.edu.uniquindio.poo.viewController.AutoVC;
 import co.edu.uniquindio.poo.viewController.BienvenidoVC;
 import co.edu.uniquindio.poo.viewController.CamionetaVC;
-import co.edu.uniquindio.poo.viewController.CrudClienteVC;
 import co.edu.uniquindio.poo.viewController.CrudClienteVC;
 import co.edu.uniquindio.poo.viewController.InicioVC;
 import co.edu.uniquindio.poo.viewController.MotoVC;
@@ -130,6 +130,22 @@ public class App extends Application {
             AnchorPane rootLayout = (AnchorPane) loader.load();
             MotoVC motoVC=loader.getController();
             motoVC.setApp(this);
+
+            Scene scene = new Scene(rootLayout);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+    public void openAuto() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/co/edu/uniquindio/poo/Auto.fxml"));
+            AnchorPane rootLayout = (AnchorPane) loader.load();
+            AutoVC autoVC = loader.getController();
+            autoVC.setApp(this);
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);

@@ -10,6 +10,7 @@ public class Empresa {
     public Collection<Reserva>reservas;
     public Collection<Camioneta>camionetas;
     public Collection<Moto>motos;
+    public Collection<Auto>autos;
 
     public Empresa(String nombre){
         this.nombre=nombre;
@@ -18,6 +19,8 @@ public class Empresa {
         this.vehiculos=new LinkedList<>();
         this.camionetas=new LinkedList<>();
         this.motos=new LinkedList<>();
+        this.autos=new LinkedList<>();
+
     }
 
     public String getNombre() {
@@ -63,6 +66,14 @@ public class Empresa {
 
     public Collection<Moto> getMotos() {
         return motos;
+    }
+
+    public void setAutos(Collection<Auto> autos) {
+        this.autos = autos;
+    }
+
+    public Collection<Auto> getAutos() {
+        return autos;
     }
 
     public void setMotos(Collection<Moto> motos) {
@@ -242,6 +253,51 @@ public boolean actualizarmoto(String placa, Moto actualizado) {
             moto.setAñoFabricacion(actualizado.getAñoFabricacion());
             moto.setTarifaBase(actualizado.getTarifaBase());
             moto.setMarca(actualizado.getMarca());
+            centinela = true;
+            break;
+        }
+    }
+    return centinela;
+}
+public boolean verfificarAuto (String placa) {
+    for (Auto auto : autos) {
+        if (placa.equals(auto.getPlaca())) {
+            return false;
+        }
+    }
+    return true;
+}
+
+public boolean agregarAuto(Auto auto){
+    boolean centinela = false;
+    if(verfificarAuto(auto.getPlaca())){
+        autos.add(auto);
+        centinela=true;
+    }
+    return centinela;
+}
+
+public boolean eliminarAuto(String placa) {
+    boolean centinela = false;
+    for (Auto auto : autos) {
+        if (auto.getPlaca().equals(placa)) {
+            autos.remove(auto);
+            centinela = true;
+            break;
+        }
+    }
+    return centinela;
+}
+
+public boolean actualizarAuto(String placa, Auto actualizado) {
+    boolean centinela = false;
+    for (Auto auto : autos) {
+        if (auto.getPlaca().equals(placa)) {
+            auto.setPlaca(actualizado.getPlaca());
+            auto.setModelo(actualizado.getModelo());
+            auto.setAñoFabricacion(actualizado.getAñoFabricacion());
+            auto.setPuertas(actualizado.getPuertas());
+            auto.setMarca(actualizado.getMarca());
             centinela = true;
             break;
         }

@@ -8,20 +8,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import co.edu.uniquindio.poo.App;
-import co.edu.uniquindio.poo.model.Camioneta;
 import co.edu.uniquindio.poo.model.Empresa;
 import co.edu.uniquindio.poo.model.Moto;
-import java.util.ArrayList;
-import co.edu.uniquindio.poo.model.Vehiculo;
 import co.edu.uniquindio.poo.model.Moto.TipoCaja;
 
 public class MotoVC {
@@ -60,6 +54,27 @@ private TableColumn<Moto, Enum<TipoCaja>> clm_tipo;
 
 private MotoCON motoCON;
 private Empresa empresa;
+
+public String getMatricula() {
+    return text_placa.getText();
+}
+
+public String getMarca() {
+    return text_marca.getText();
+}
+
+public String getModelo() {
+    return text_modelo.getText();
+}
+
+public int getAnio() {
+    return Integer.parseInt(text_Anio.getText());
+}
+
+public TipoCaja getCaja() {
+    return box_caja.getValue(); // Obtiene el valor seleccionado del ComboBox
+}
+
 
 @FXML
     private Button btn_volver;
@@ -136,6 +151,14 @@ private Empresa empresa;
         }
     }
 
+    private Moto buildMoto() {
+        int Anio = Integer.parseInt(field_Anio.getText());
+        TipoCaja tipoCaja = box_caja.getValue();
+    
+        Moto moto = new Moto(field_Placa.getText(),field_Marca.getText(),field_Modelo.getText(),Anio,tipoCaja);
+    
+        return moto;
+    }
     
     
 

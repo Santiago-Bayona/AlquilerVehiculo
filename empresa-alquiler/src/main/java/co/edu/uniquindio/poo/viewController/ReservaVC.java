@@ -6,7 +6,10 @@ import java.util.ResourceBundle;
 import co.edu.uniquindio.poo.App;
 import co.edu.uniquindio.poo.Controller.CamionetaCON;
 import co.edu.uniquindio.poo.Controller.ReservaCON;
+import co.edu.uniquindio.poo.viewController.CamionetaVC;
+import co.edu.uniquindio.poo.model.Auto;
 import co.edu.uniquindio.poo.model.Camioneta;
+import co.edu.uniquindio.poo.model.Moto;
 import co.edu.uniquindio.poo.model.Reserva;
 import co.edu.uniquindio.poo.model.Vehiculo;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -26,6 +30,11 @@ public class ReservaVC {
     ReservaCON reservaCON;
     ObservableList<Reserva> listrReservas = FXCollections.observableArrayList();
     Reserva selectedReserva;
+
+    private CamionetaVC camionetaVC;
+    private AutoVC autoVC;
+    private MotoVC motoVC;
+
 
     @FXML
     private ResourceBundle resources;
@@ -185,12 +194,49 @@ public class ReservaVC {
 
     private Reserva buildReserva() {
         int diasAlquiler = Integer.parseInt(txt_dias.getText());
+        String codigo = txt_codigo.getText();
+        String tipoVehiculo = txt_vehiculo.getText().trim();
         
-    
-        Reserva reserva = new Reserva(diasAlquiler,txt_codigo.getText(),txt_vehiculo.getText());
-    
-        return reserva;
+        Vehiculo vehiculo = null;
+        switch (tipoVehiculo.toLowerCase()) {
+            case "camioneta":
+                vehiculo = new Camioneta(
+                    camionetaVC.getPlacaCamioneta(),
+                    camionetaVC.getMarcaCamioneta(),
+                    camionetaVC.getModeloCamioneta(),
+                    camionetaVC.getAnioCamioneta(),
+                    camionetaVC.getCapacidadCarga()
+                );
+                break;
+                case "auto":
+                vehiculo = new Auto(
+                    autoVC.getMatricula(),
+                    autoVC.getMarca(),
+                    autoVC.getModelo(),
+                    autoVC.getAnio(),
+                    autoVC.getCantidadPuertas()
+                );
+                break;
+            case "moto":
+                vehiculo = new Moto(
+                    motoVC.getMatricula(),
+                    motoVC.getMarca(),
+                    motoVC.getModelo(),
+                    motoVC.getAnio(),
+                    motoVC.getCaja()
+                );
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de vehículo desconocido: " + tipoVehiculo);
+        }
+        
+        return new Reserva(diasAlquiler, codigo, vehiculo);
     }
+    
+       
+    
+    
+
     
 
     private void EliminarReserva() {

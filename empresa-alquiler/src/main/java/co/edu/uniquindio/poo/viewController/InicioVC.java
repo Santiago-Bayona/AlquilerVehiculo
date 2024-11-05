@@ -76,8 +76,13 @@ import javafx.scene.control.Label;
     
         @FXML
         void AbrirAuto(ActionEvent event) {
-    
+            try {
+                app.openAuto();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        
         public void setApp(App app) {
             this.app = app;
         }
