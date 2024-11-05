@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.poo.viewController.InicioVC">
    <children>
-      <Button fx:id="btt_reserva" layoutX="426.0" layoutY="82.0" mnemonicParsing="false" onAction="#AdministrarReservas" text="reserva" />
-      <Button fx:id="btt_cliente" layoutX="102.0" layoutY="82.0" mnemonicParsing="false" onAction="#AdministraClientes" text="cliente" />
-      <Button fx:id="btt_vehiculo" layoutX="268.0" layoutY="285.0" mnemonicParsing="false" onAction="#AdministrarVehiculos" text="vehiculo" />
-      <Label fx:id="lbl_inicio" layoutX="283.0" layoutY="190.0" text="gestion" />
+      <Button fx:id="btt_reserva" layoutX="84.0" layoutY="192.0" mnemonicParsing="false" onAction="#AdministrarReservas" text="reserva" />
+      <Button fx:id="btt_cliente" layoutX="85.0" layoutY="106.0" mnemonicParsing="false" onAction="#AdministraClientes" text="cliente" />
+      <Button fx:id="btt_Camioneta" layoutX="25.0" layoutY="289.0" mnemonicParsing="false" onAction="#AbrirCamioneta" text="Camioneta" />
+      <Label fx:id="lbl_inicio" layoutX="182.0" layoutY="14.0" text="Gestion de la empresa" textAlignment="CENTER">
+         <font>
+            <Font name="Calibri Bold Italic" size="24.0" />
+         </font></Label>
+      <Label layoutX="58.0" layoutY="69.0" text="Administra Cliente">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="49.0" layoutY="156.0" text="Administrar Reserva">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="51.0" layoutY="249.0" text="Administra vehiculos">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="btt_Moto" layoutX="135.0" layoutY="289.0" mnemonicParsing="false" onAction="#abrirMoto" text="Moto" />
+      <Button fx:id="btt_Auto" layoutX="210.0" layoutY="289.0" mnemonicParsing="false" onAction="#AbrirAuto" text="Auto" />
+      <Label layoutX="418.0" layoutY="69.0" text="Tarifa base" />
+      <Label layoutX="368.0" layoutY="111.0" text="Auto=" />
+      <Label layoutX="368.0" layoutY="146.0" text="Moto=" />
+      <Label layoutX="368.0" layoutY="182.0" text="Camioneta=" />
+      <Label layoutX="463.0" layoutY="111.0" text="2000" />
+      <Label layoutX="463.0" layoutY="146.0" text="2000" />
+      <Label layoutX="463.0" layoutY="182.0" text="10000" />
+      <Label layoutX="414.0" layoutY="223.0" text="Tarifa extra" />
+      <Label layoutX="368.0" layoutY="249.0" text="Moto=" />
+      <Label layoutX="463.0" layoutY="249.0" text="2000" />
+      <Label layoutX="370.0" layoutY="283.0" text="Camioneta=" />
+      <Label layoutX="467.0" layoutY="283.0" text="5% por kilo" />
+      <AnchorPane layoutX="341.0" layoutY="61.0" prefHeight="265.0" prefWidth="262.0">
+         <cursor>
+            <Cursor fx:constant="SW_RESIZE" />
+         </cursor>
+         <effect>
+            <Blend />
+         </effect>
+      </AnchorPane>
+      <ImageView fitHeight="62.0" fitWidth="82.0" layoutX="27.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/camioneta.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="55.0" fitWidth="64.0" layoutX="132.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/moto.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="72.0" layoutX="209.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/descarga.jpg" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

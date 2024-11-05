@@ -9,6 +9,7 @@ public class Empresa {
     public Collection<Cliente>clientes;
     public Collection<Reserva>reservas;
     public Collection<Camioneta>camionetas;
+    public Collection<Moto>motos;
 
     public Empresa(String nombre){
         this.nombre=nombre;
@@ -16,6 +17,7 @@ public class Empresa {
         this.reservas=new LinkedList<>();
         this.vehiculos=new LinkedList<>();
         this.camionetas=new LinkedList<>();
+        this.motos=new LinkedList<>();
     }
 
     public String getNombre() {
@@ -57,6 +59,14 @@ public class Empresa {
 
     public void setReservas(Collection<Reserva> reservas) {
         this.reservas = reservas;
+    }
+
+    public Collection<Moto> getMotos() {
+        return motos;
+    }
+
+    public void setMotos(Collection<Moto> motos) {
+        this.motos = motos;
     }
 
     public boolean verfificarCamioneta(String placa) {
@@ -115,7 +125,6 @@ public class Empresa {
     }
 
     public boolean agregarCliente(Cliente  cliente){
-        
         boolean centinela = false;
         if(verificarCliente(cliente.getCedula())){
             clientes.add(cliente);
@@ -136,6 +145,20 @@ public class Empresa {
         return centinela;
     }
 
+    public boolean actualizarCliente(String cedula, Cliente actualizado) {
+        boolean centinela = false;
+        for (Cliente cliente : clientes) {
+            if (cliente.getCedula().equals(cedula)) {
+                cliente.setnombre(actualizado.getnombre());
+                cliente.setApellido(actualizado.getApellido());
+                cliente.setCedula(actualizado.getCedula());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
     public boolean verificarReserva(String codigo) {
         for (Reserva reserva : reservas) {
             if (codigo.equals(reserva.getCodigo())) {
@@ -145,10 +168,13 @@ public class Empresa {
         return true;
     }
 
-    public void agregarReserva(Reserva  reserva){
+    public boolean agregarReserva(Reserva  reserva){
+        boolean centinela=false;
         if(verificarReserva(reserva.getCodigo())){
             reservas.add(reserva);
+            centinela=true;
         }
+        return centinela;
     }
     
     public boolean eliminarreserva(String codigo) {
@@ -162,4 +188,64 @@ public class Empresa {
         }
         return centinela;
     }
+
+    public boolean ActualizarReserva(String codigo, Reserva actualizado) {
+        boolean centinela = false;
+        for (Reserva reserva : reservas) {
+            if (reserva.getCodigo().equals(codigo)) {
+                reserva.setCodigo(actualizado.getCodigo());
+                reserva.setDiasAlquiler(actualizado.getDiasAlquiler());
+                reserva.setVehiculo(actualizado.getVehiculo());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+public boolean verficarMoto(String placa) {
+    for (Moto moto : motos) {
+        if (placa.equals(moto.getPlaca())) {
+            return false;
+        }
+    }
+    return true;
+}
+
+public boolean agregarMoto(Moto moto) {
+    boolean centinela = false;
+    if(verficarMoto(moto.getPlaca())){
+        motos.add(moto);
+        centinela=true;
+    }
+    return centinela;
+}
+
+public boolean eliminarmoto(String placa) {
+    boolean centinela = false;
+    for (Moto moto : motos) {
+        if (moto.getPlaca().equals(placa)) {
+            motos.remove(moto);
+            centinela = true;
+            break;
+        }
+    }
+    return centinela;
+}
+
+public boolean actualizarmoto(String placa, Moto actualizado) {
+    boolean centinela = false;
+    for (Moto moto : motos) {
+        if (moto.getPlaca().equals(placa)) {
+            moto.setPlaca(actualizado.getPlaca());
+            moto.setModelo(actualizado.getModelo());
+            moto.setAñoFabricacion(actualizado.getAñoFabricacion());
+            moto.setTarifaBase(actualizado.getTarifaBase());
+            moto.setMarca(actualizado.getMarca());
+            centinela = true;
+            break;
+        }
+    }
+    return centinela;
+}
 }

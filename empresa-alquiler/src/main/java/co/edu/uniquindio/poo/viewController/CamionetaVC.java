@@ -70,7 +70,19 @@ public class CamionetaVC {
     private Button btn_agregar;
 
     @FXML
+    private Button btn_volver;
+
+    @FXML
     private TableColumn<Camioneta, String> tbc_PlacaCamioneta;
+
+    @FXML
+    void volver(ActionEvent event) {
+        try {
+            app.openCrudCliente();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void AgregarCamioneta(ActionEvent event) {

@@ -2,13 +2,13 @@ package co.edu.uniquindio.poo.model;
 
 public class Cliente {
     private String nombre;
-    private int edad;
+    private String apellido;
     private String cedula;
 
 
-    public Cliente(String nombre, int edad, String cedula) {
+    public Cliente(String nombre, String apellido, String cedula) {
         this.nombre = nombre;
-        this.edad = edad;
+        this.apellido = apellido;
         this.cedula = cedula;
     }
 
@@ -20,12 +20,12 @@ public class Cliente {
         this.nombre=nombre;
     }
 
-    public int getEdad() {
-        return edad;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getCedula() {
