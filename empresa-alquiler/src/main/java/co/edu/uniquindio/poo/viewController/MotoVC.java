@@ -1,6 +1,9 @@
 package co.edu.uniquindio.poo.viewController;
 import javafx.scene.text.Text;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import co.edu.uniquindio.poo.Controller.MotoCON;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,17 +13,20 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import co.edu.uniquindio.poo.App;
+import co.edu.uniquindio.poo.model.Camioneta;
 import co.edu.uniquindio.poo.model.Empresa;
 import co.edu.uniquindio.poo.model.Moto;
 import co.edu.uniquindio.poo.model.Moto.TipoCaja;
 
 public class MotoVC {
 
-    
+    Moto selectedMoto;
     @FXML
 private Text text_placa;
 @FXML
@@ -45,12 +51,20 @@ private TableView<Moto> clm_modelo;
 private Button btt_agregar;
 @FXML
 private Button btt_actualizar;
+
+@FXML
+private Button btt_Eliminar;
 @FXML
 private Text text_Tipo;
 @FXML
 private Text field_Tipo;
 @FXML
 private TableColumn<Moto, Enum<TipoCaja>> clm_tipo;
+@FXML
+private ResourceBundle resources;
+
+@FXML
+private URL location;
 
 private MotoCON motoCON;
 private Empresa empresa;
@@ -100,6 +114,16 @@ public TipoCaja getCaja() {
 
 
   private ObservableList<Moto> motosList = FXCollections.observableArrayList();
+  
+  @FXML
+  void eliminarmoto(ActionEvent event) {
+      eliminarmoto();
+  }
+
+  @FXML
+  void ActualizarMoto(ActionEvent event) {
+      actualizarmoto();
+  }
 
     
 
@@ -122,6 +146,48 @@ public TipoCaja getCaja() {
         clm_modelo.setItems(motosList);
 
         btt_agregar.setOnAction(event -> agregarMoto());
+
+        btt_actualizar.setOnAction(event -> actualizarmoto());
+
+        btt_Eliminar.setOnAction(event -> eliminarmoto());
+
+    
+        initView();
+    }
+
+    
+
+
+
+
+
+
+    private void initView() {
+        // Traer los datos del cliente a la tabla
+       initDataBinding();
+
+        // Obtiene la lista
+        obtenerMotos();
+
+        // Limpiar la tabla
+        clm_modelo.getItems().clear();
+
+        // Agregar los elementos a la tabla
+        clm_modelo.setItems(motosList);
+
+        // Seleccionar elemento de la tabla
+        listenerSelection();
+    }
+
+
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    private void initDataBinding() {
+        clm_placa.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPlaca()));
+        clm_marca.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMarca()));
+        columnaModelo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getModelo()));
+        clm_añof.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getAnioFabricacion()));
+       
+        // Usamos SimpleObjectProperty para manejar Double y Integer correctamente
     }
 
     @FXML
@@ -151,14 +217,81 @@ public TipoCaja getCaja() {
         }
     }
 
+    private void agregarmoto() {
+        Moto moto = buildMoto();
+        if (motoCON.crearmoto(moto)) {
+            motosList.add(moto);
+            limpiarCampos();
+        }
+    }
+
+    private void obtenerMotos() {
+        motosList.addAll(motoCON.obtenerLisMotos());
+    }
+
+    private void mostrarInformacionMoto(Moto moto) {
+        if (moto != null) {
+            clm_placa.setText(moto.getPlaca());
+            clm_marca.setText(moto.getMarca());
+            columnaModelo.setText(moto.getModelo());
+            clm_añof.setText(String.valueOf(moto.getAnioFabricacion()));
+            
+        }
+    }
+    private void eliminarCliente() {
+        if (motoCON.eliminarmoto(clm_placa.getText())) {
+            motosList.remove(selectedMoto);
+            limpiarCampos();
+            limpiarSeleccion();
+        }
+    }
+
+    private void eliminarmoto() {
+        if (motoCON.eliminarmoto(clm_placa.getText())) {
+            motosList.remove(selectedMoto);
+            limpiarCampos();
+            limpiarSeleccion();
+        }
+    }
+
+
+    private void listenerSelection() {
+        clm_modelo.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedMoto = newSelection;
+            mostrarInformacionMoto(selectedMoto);
+        });
+    }
+
+    private void actualizarmoto() {
+
+        if (selectedMoto != null &&
+                motoCON.actualizarmoto(selectedMoto.getPlaca(), buildMoto())) {
+
+            int index = motosList.indexOf(selectedMoto);
+            if (index >= 0) {
+                motosList.set(index, buildMoto());
+            }
+
+            clm_modelo.refresh();
+            limpiarSeleccion();
+            limpiarCampos();
+        }
+    }
+
     private Moto buildMoto() {
-        int Anio = Integer.parseInt(field_Anio.getText());
+        int Anio = Integer.parseInt(clm_añof.getText());
         TipoCaja tipoCaja = box_caja.getValue();
     
-        Moto moto = new Moto(field_Placa.getText(),field_Marca.getText(),field_Modelo.getText(),Anio,tipoCaja);
+        Moto moto = new Moto(clm_placa.getText(),clm_marca.getText(),columnaModelo.getText(),Anio,tipoCaja);
     
         return moto;
     }
+    private void limpiarSeleccion() {
+        clm_modelo.getSelectionModel().clearSelection();
+        limpiarCampos();
+    }
+
+      
     
     
 
